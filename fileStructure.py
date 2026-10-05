@@ -3,11 +3,10 @@ import os, keyboard, time
 
 class file_structure:
     def __init__(self):
-        self.__path = '/'
         os.chdir('/')
         self.__cwd = os.getcwd()
         self.__nwd = ''
-        print("Currently in",self.__cwd)
+        print("CMD started...")
 
     def return_dir_files(self):
         return os.listdir(self.__cwd)
@@ -75,9 +74,14 @@ class file_structure:
                 time.sleep(0.05)
 
             if keyboard.is_pressed('esc'):
-                print()
-                self.prev_dir(self.path_destructor(self.__cwd))
-                x=-1
-                time.sleep(0.05)
+                if (self.__cwd == 'C:\\'):
+                    self.prev_dir(self.path_destructor(self.__cwd))
+                    x=-1
+                    time.sleep(0.05)
+                else:
+                    print()
+                    self.prev_dir(self.path_destructor(self.__cwd))
+                    x=-1
+                    time.sleep(0.05)
         
             time.sleep(0.05)
