@@ -1,9 +1,7 @@
 #import other classes(.py files) into the main class(main.py)
-import fileStructure
-import cmdFileStructure
+import cmdChangeDir
 
 if __name__ == '__main__':
-    # mainobj = fileStructure.file_structure()
-    # mainobj.manipulate()
-    mainobj = cmdFileStructure.cmd_file_structure()
-    mainobj.read_dir_name()
+    print("Started cmd...")
+    mainobj = cmdChangeDir.changeDir()
+    mainobj.read_dir_file_name()
