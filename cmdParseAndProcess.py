@@ -20,15 +20,12 @@ class parseAndProcess(readInput):
                 
             case 2:
                 if parsed_path[0] == "cd":
-                    base_path = (
-                    self.cwd.replace(">", "\\") + parsed_path[1] 
-                    if self.cwd != "C:\\>" 
-                    else self.cwd.replace(">", "") + parsed_path[1]
-                    )
-                    
-
+                    return self.cwd.replace(">", "\\") + parsed_path[1] if self.cwd != "C:\\>" else self.cwd.replace(">", "") + parsed_path[1]
 
     def dirname_corrector(self):
+        self.nwd = self.cwd[self.cwd.rfind("\\"):]
+        self.cwd = self.cwd.replace(">", "\\") if self.cwd != "C:\\>" else self.cwd.replace(">", "")
+        self.cwd = self.cwd.replace(self.nwd,"")
         print("Dir/File Doesn't Exitst...")
         dir_files = [dir_file.casefold() for dir_file in self.listdir_file()]
         print("Closest matched Directories and Files in Current Directory: ")
@@ -43,7 +40,7 @@ class parseAndProcess(readInput):
             print("Select the directory/file you want to access..")
             x=0
             while True:
-                print(f"\r{dir_files[x]}x1b[K",end="",flush=True)
+                print(f"\r{dir_files[x]}\x1b[K",end="",flush=True)
                 event = keyboard.read_event()
                 time.sleep(0.03)
                 if event.event_type == keyboard.KEY_DOWN:
@@ -63,10 +60,10 @@ class parseAndProcess(readInput):
             self.enter_dir_file()
         else:
             try:
-                self.cwd,self.nwd = self.parse_input()
-                self.enter_dir_file()
+                self.cwd = self.parse_input()
 
             except FileNotFoundError:
-                self.nwd = self.dirname_corrector()
+
+                self.dirname_corrector()
 
             self.enter_dir_file()
