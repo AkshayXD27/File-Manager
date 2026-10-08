@@ -29,18 +29,27 @@ class readInput(changeDir):
                     elif event.name == "backspace":
                         self.nwd = self.nwd[:-1]
 
-                    elif event.name == "esc":
-                        if self.nwd == "":
+                                        elif event.name == "esc":
+                        if self.nwd == "": 
                             if self.cwd == "C:\\>":
-                                self.cwd = self.cwd[:self.cwd.rindex(">")]
+                                pass
                             else:
-                                self.cwd = self.cwd[:self.cwd.rindex("\\")]
-                                print()
+                               
+                                temp_path = self.cwd.rstrip("\\")
+                                
+                                if "\\" in temp_path:
+                                   
+                                    self.cwd = temp_path[:temp_path.rindex("\\") + 1]
+                                else:
+                                  
+                                    self.cwd = "C:\\>"
+                                
                             self.enter_dir_file()
                             pressedEnter = False
                         else:
                             self.nwd = ""
                             pressedEnter = False
+
 
                     else:
                       if len(event.name)==1 or event.name =="space":
